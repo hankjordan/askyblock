@@ -79,7 +79,7 @@ public class MiniShopItem {
                 // plugin.getLogger().info("DEBUG: extra is not empty");                
                 // If it not a potion, then the extras should just be durability
                 if (!material.name().contains("POTION")) {
-                    if (material.equals(Material.MONSTER_EGG)) {
+                    if (material.equals(Material.LEGACY_MONSTER_EGG)) {
                         try {
                             EntityType type = EntityType.valueOf(extra.toUpperCase());
                             if (Bukkit.getServer().getVersion().contains("(MC: 1.8") || Bukkit.getServer().getVersion().contains("(MC: 1.7")) {
@@ -101,7 +101,7 @@ public class MiniShopItem {
                                 }
                             }
                         }
-                    } else if (!material.equals(Material.MOB_SPAWNER)) {
+                    } else if (!material.equals(Material.LEGACY_MOB_SPAWNER)) {
                         item.setDurability(Short.parseShort(extra));
                     }
                 } else {
@@ -117,7 +117,7 @@ public class MiniShopItem {
             List<String> desc = new ArrayList<String>(Arrays.asList(description.split("\\|")));
             meta.setDisplayName(desc.get(0));
             ArrayList<String> buyAndSell = new ArrayList<String>();
-            if (material.equals(Material.MOB_SPAWNER) && !extra.isEmpty()) {
+            if (material.equals(Material.LEGACY_MOB_SPAWNER) && !extra.isEmpty()) {
                 //Bukkit.getLogger().info("DEBUG: mob spawner and extra is " + extra);
                 // Get the entity type
                 for (EntityType type : EntityType.values()) {
@@ -177,7 +177,7 @@ public class MiniShopItem {
         ItemMeta meta = temp.getItemMeta();
         meta.setDisplayName(null);
         List<String> lore = new ArrayList<String>(1);
-        if (item.getType().equals(Material.MOB_SPAWNER)) {  
+        if (item.getType().equals(Material.LEGACY_MOB_SPAWNER)) {  
             lore.add(Util.prettifyText(entityType.name()));
         }
         meta.setLore(lore);
@@ -296,7 +296,7 @@ public class MiniShopItem {
         // item, color, etc.
         short damage = item.getDurability();
         switch (mat) {
-        case WOOL:
+        case LEGACY_WOOL:
             switch ((int) damage) {
             case 0:
                 return "WHITE_WOOL";
@@ -332,7 +332,7 @@ public class MiniShopItem {
                 return "BLACK_WOOL";
             }
             return mat.toString();
-        case INK_SACK:
+        case LEGACY_INK_SACK:
             switch ((int) damage) {
             case 0:
                 return "INK_SAC";
@@ -368,7 +368,7 @@ public class MiniShopItem {
                 return "BONE_MEAL";
             }
             return mat.toString();
-        case SMOOTH_BRICK:
+        case LEGACY_SMOOTH_BRICK:
             switch ((int) damage) {
             case 0:
                 return "STONE_BRICKS";
@@ -466,7 +466,7 @@ public class MiniShopItem {
             }
             return mat.toString();
 
-        case WOOD:
+        case LEGACY_WOOD:
             switch ((int) damage) {
             case 0:
                 return "OAK_PLANKS";

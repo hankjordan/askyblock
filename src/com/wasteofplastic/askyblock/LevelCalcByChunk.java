@@ -135,21 +135,22 @@ public class LevelCalcByChunk {
                 }
 
                 for (int y = 0; y < island.getCenter().getWorld().getMaxHeight(); y++) {
-                    Material blockType = Material.getMaterial(chunk.getBlockTypeId(x, y, z));
+                    Material blockType = chunk.getBlockType(x, y, z);
                     boolean belowSeaLevel = Settings.seaHeight > 0 && y <= Settings.seaHeight;
                     // Air is free
                     if (!blockType.equals(Material.AIR)) {
-                        checkBlock(blockType, chunk.getBlockData(x, y, z), belowSeaLevel);
+                        //checkBlock(blockType, chunk.getBlockData(x, y, z), belowSeaLevel);
+                        checkBlock(blockType, belowSeaLevel);
                     }
                 }
             }
         }
     }
 
-    private void checkBlock(Material type, int blockData, boolean belowSeaLevel) {
+    private void checkBlock(Material type, boolean belowSeaLevel) {
         // Currently, there is no alternative to using block data (Feb 2018)
         @SuppressWarnings("deprecation")
-        MaterialData md = new MaterialData(type, (byte) blockData);
+        MaterialData md = new MaterialData(type);
         int count = limitCount(md);
         if (count != 0) {
             if (belowSeaLevel) {
